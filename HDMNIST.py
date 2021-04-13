@@ -1,6 +1,7 @@
 import numpy as np
 import pickle
 import pandas as pd
+import csv
 from mnist import MNIST
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
@@ -147,6 +148,12 @@ def main(mode):
             for epoch in range(retraining_epoch):
                 print('Retraining epoch: ' + str(epoch))
                 am = retrain(am, X_train[:train_size], Y_train[:train_size], position_table, grayscale_table, eachdim)
+                with open('output.csv', 'w') as csv_file:
+                    csvwriter = csv.writer(csv_file)
+                    for row in am:
+                        csvwriter.writerow(row)
+                csv_file.close
+            
             test(am, X_test[:test_size], Y_test[:test_size], position_table, grayscale_table, eachdim)
             savemodel(am, position_table, grayscale_table, fpath)
 
