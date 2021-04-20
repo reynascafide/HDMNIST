@@ -148,10 +148,9 @@ def main(mode):
             for epoch in range(retraining_epoch):
                 print('Retraining epoch: ' + str(epoch))
                 am = retrain(am, X_train[:train_size], Y_train[:train_size], position_table, grayscale_table, eachdim)
-                am_hex = np.array([float.hex(float(row)) for row in am])
                 with open('output.csv', 'w') as csv_file:
                     csvwriter = csv.writer(csv_file)
-                    for row in am_hex:
+                    for row in am:
                         csvwriter.writerow(row)
                 csv_file.close
             
