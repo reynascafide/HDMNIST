@@ -151,7 +151,7 @@ def main(mode):
                 with open('output.csv', 'w') as csv_file:
                     csvwriter = csv.writer(csv_file)
                     for row in am:
-                        csvwriter.writerow(float.hex(row))
+                        csvwriter.writerow(hex(row))
                 csv_file.close
             
             test(am, X_test[:test_size], Y_test[:test_size], position_table, grayscale_table, eachdim)
