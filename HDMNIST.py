@@ -148,8 +148,8 @@ def main(mode):
             for epoch in range(retraining_epoch):
                 print('Retraining epoch: ' + str(epoch))
                 am = retrain(am, X_train[:train_size], Y_train[:train_size], position_table, grayscale_table, eachdim)
-                with open('output1.mif') as mif_file:
-                    mem = mif.load(mif_file)
+                with open('output.mif') as mif_file:
+                    mifwriter = mif.load(mif_file)
                     for row in am:
                         print(mif.dumps(mifwriter))
                 mif_file.close
