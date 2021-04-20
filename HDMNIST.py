@@ -148,11 +148,11 @@ def main(mode):
             for epoch in range(retraining_epoch):
                 print('Retraining epoch: ' + str(epoch))
                 am = retrain(am, X_train[:train_size], Y_train[:train_size], position_table, grayscale_table, eachdim)
-                with open('output.csv', 'w') as csv_file:
-                    csvwriter = csv.writer(csv_file)
+                with open('output1.mif') as mif_file:
+                    mem = mif.load(mif_file)
                     for row in am:
-                        csvwriter.writerow(row)
-                csv_file.close
+                        print(mif.dumps(mifwriter))
+                mif_file.close
             
             test(am, X_test[:test_size], Y_test[:test_size], position_table, grayscale_table, eachdim)
             savemodel(am, position_table, grayscale_table, fpath)
