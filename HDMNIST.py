@@ -153,6 +153,7 @@ def main(mode):
                     for row in am:
                         csvwriter.writerow(row)
                 csv_file.close
+                print(am.dtype)
             
             test(am, X_test[:test_size], Y_test[:test_size], position_table, grayscale_table, eachdim)
             savemodel(am, position_table, grayscale_table, fpath)
