@@ -145,9 +145,9 @@ def main(mode):
                 while c<9999:
                     while r<9:
                         am[r][c] = hex("0x{:04x}".format((int(am[r][c]) & 0xFFFF), '04x')
-                        r+=1
+                        r += 1
                     r=0
-                    c+=1  
+                    c += 1  
                 with open('output.csv', 'w') as csv_file:
                     csvwriter = csv.writer(csv_file)
                     for row in am:
