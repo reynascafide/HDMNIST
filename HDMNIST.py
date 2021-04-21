@@ -140,13 +140,12 @@ def main(mode):
             for epoch in range(retraining_epoch):
                 print('Retraining epoch: ' + str(epoch))
                 am = retrain(am, X_train[:train_size], Y_train[:train_size], position_table, grayscale_table, eachdim)
+                am_hex = np.array([hex([:,0]) for row in am])
                 with open('output.csv', 'w') as csv_file:
                     csvwriter = csv.writer(csv_file)
-                    for row in am:
+                    for row in am_hex:
                         csvwriter.writerow(row)
                 csv_file.close
-                print(am.dtype)
-                numpy.indices(am)
             
             test(am, X_test[:test_size], Y_test[:test_size], position_table, grayscale_table, eachdim)
             savemodel(am, position_table, grayscale_table, fpath)
