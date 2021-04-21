@@ -144,7 +144,7 @@ def main(mode):
                 r = 0
                 while c<9999:
                     while r<9:
-                        am[r][c] = hex("0x{:04x}".format((int(am[r][c]) & 0xFFFF), '04x')
+                        am[r][c] = hex(int(am[r][c])).lstrip("0x").rstrip("L")
                         r = r + 1
                     r = 0
                     c = c + 1  
