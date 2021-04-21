@@ -144,10 +144,10 @@ def main(mode):
                 r=0
                 while c<9999:
                     while r<9:
-                        am[c][r] = hex(am[c][r]).lstrip("0x").rstrip("L")
+                        am[r][c] = hex(am[r][c]).lstrip("0x").rstrip("L")
                         r+=1
                     r=0
-                    c+=1
+                    c+=1  
                 with open('output.csv', 'w') as csv_file:
                     csvwriter = csv.writer(csv_file)
                     for row in am:
