@@ -39,12 +39,8 @@ def encode(img, position_table, grayscale_table, dim):
 # Train the AM
 def train(am, X_train, Y_train, position_table, grayscale_table, dim):
     am_ = am.copy()
-    # idx = 0
     for img_x, img_y in zip(X_train, Y_train):
         am_[img_y] = np.add(am_[img_y], encode(img_x, position_table, grayscale_table, dim))
-        # if idx % 100 == 0:
-        #     print(idx)
-        # idx = idx + 1
     return am_
 
 # Predict one image with the qhv
@@ -71,12 +67,8 @@ def predict(am, img, position_table, grayscale_table, dim):
 # Predict entire test set
 def test(am, X_test, Y_test, position_table, grayscale_table, dim):
     Y_pred = []
-    #idx = 0
     for img in X_test:
         Y_pred.append(predict(am, img, position_table, grayscale_table, dim))
-        # idx = idx + 1
-        # if idx % 100 == 0:
-        #     print(idx)
     acc = accuracy_score(Y_test, Y_pred)
     print('Testing accuracy is: ' + str(acc))
     return acc
@@ -154,6 +146,7 @@ def main(mode):
                         csvwriter.writerow(row)
                 csv_file.close
                 print(am.dtype)
+                numpy.indices(am)
             
             test(am, X_test[:test_size], Y_test[:test_size], position_table, grayscale_table, eachdim)
             savemodel(am, position_table, grayscale_table, fpath)
