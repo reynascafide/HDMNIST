@@ -144,11 +144,11 @@ def main(mode):
                 r = 0
                 while c<9999:
                     while r<9:
-                        am[r][c] = hex(am[r][c]).lstrip("0x").rstrip("L")
+                        am_hex[r][c] = hex(am[r][c]).lstrip("0x").rstrip("L")
                         r = r + 1
                     r = 0
                     c = c + 1
-                list1 = am.tolist()
+                list1 = am_hex.tolist()
                 with open('output.csv', 'w') as csv_file:
                     csvwriter = csv.writer(csv_file)
                     for row in range(len(list1)):
