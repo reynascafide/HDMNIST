@@ -152,8 +152,7 @@ def main(mode):
                 list1 = am_hex.tolist()
                 with open('output.csv', 'w') as csv_file:
                     csvwriter = csv.writer(csv_file)
-                    for row in range(len(list1)):
-                        csvwriter.writerow(row)
+                    csvwriter.writerow(list1)
                 csv_file.close
             
             test(am, X_test[:test_size], Y_test[:test_size], position_table, grayscale_table, eachdim)
