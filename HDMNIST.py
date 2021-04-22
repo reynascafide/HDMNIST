@@ -136,6 +136,7 @@ def main(mode):
             position_table = lookup_generate(eachdim, datatype, imgsize*imgsize)
             grayscale_table = lookup_generate(eachdim, datatype, maxval)        
             am = np.zeros((n_class, eachdim), dtype = np.float32)
+            am = dtype('f4')
             am = train(am, X_train, Y_train, position_table, grayscale_table, eachdim)
             for epoch in range(retraining_epoch):
                 print('Retraining epoch: ' + str(epoch))
