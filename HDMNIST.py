@@ -141,12 +141,7 @@ def main(mode):
                 print('Retraining epoch: ' + str(epoch))
                 am = retrain(am, X_train[:train_size], Y_train[:train_size], position_table, grayscale_table, eachdim)
                 am = am.astype(np.float32)
-                with open('output.csv', 'w') as csv_file:
-                    csvwriter = csv.writer(csv_file)
-                    for row in am:
-                       csvwriter.writerow(row)
-                csv_file.close
-            
+                np.savetxt('output.csv', am, fmt="%.2f", delimiter=",")
             test(am, X_test[:test_size], Y_test[:test_size], position_table, grayscale_table, eachdim)
             savemodel(am, position_table, grayscale_table, fpath)
 
