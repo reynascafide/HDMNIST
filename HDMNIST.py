@@ -136,20 +136,19 @@ def main(mode):
             position_table = lookup_generate(eachdim, datatype, imgsize*imgsize)
             grayscale_table = lookup_generate(eachdim, datatype, maxval)        
             am = np.zeros((n_class, eachdim), dtype = np.int16)
-            am_hex = np.array(list, dtype = np.unicode_)
             am = train(am, X_train, Y_train, position_table, grayscale_table, eachdim)
             for epoch in range(retraining_epoch):
                 print('Retraining epoch: ' + str(epoch))
                 am = retrain(am, X_train[:train_size], Y_train[:train_size], position_table, grayscale_table, eachdim)
                 c = 0
                 r = 0
+                list1 = am.tolist()
                 while c <= 9999:
                     while r <= 9:
-                        am_hex[r][c] = hex(am[r][c]).lstrip("0x").rstrip("L")
+                        list1[r][c] = hex(am[r][c]).lstrip("0x").rstrip("L")
                         r = r + 1
                     r = 0
                     c = c + 1
-                list1 = am_hex.tolist()
                 with open('output.csv', 'w') as csv_file:
                     csvwriter = csv.writer(csv_file)
                     csvwriter.writerow(list1)
