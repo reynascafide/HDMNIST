@@ -145,7 +145,7 @@ def main(mode):
                 r = 0
                 while c <= 9999:
                     while r <= 9:
-                        am_hex[r][c] = hex(am[r][c]).lstrip("0x").rstrip("L")
+                        am_hex[c][r] = hex(am[c][r]).lstrip("0x").rstrip("L")
                         r = r + 1
                     r = 0
                     c = c + 1
