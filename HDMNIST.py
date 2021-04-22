@@ -140,10 +140,16 @@ def main(mode):
             for epoch in range(retraining_epoch):
                 print('Retraining epoch: ' + str(epoch))
                 am = retrain(am, X_train[:train_size], Y_train[:train_size], position_table, grayscale_table, eachdim)
-                np.savetxt('output.csv', am.astype(np.float32), fmt="%.2f", delimiter=",")
+                with open('output.csv', 'w') as csv_file:
+                    csvwriter = csv.writer(csv_file)
+                    for row in am:
+                        csvwriter.writerow(float(row))
+                csv_file.close
+                print(am.dtype) 
             test(am, X_test[:test_size], Y_test[:test_size], position_table, grayscale_table, eachdim)
             savemodel(am, position_table, grayscale_table, fpath)
-
+            
+            
     elif mode == 'test':
         for eachqbit in q_bit:
             QBIT = eachqbit
