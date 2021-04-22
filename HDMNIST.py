@@ -139,7 +139,7 @@ def main(mode):
             am = train(am, X_train, Y_train, position_table, grayscale_table, eachdim)
             for epoch in range(retraining_epoch):
                 print('Retraining epoch: ' + str(epoch))
-                am = retrain(am, X_train[:train_size], Y_train[:train_size], position_table, grayscale_table, eachdim))
+                am = retrain(am, X_train[:train_size], Y_train[:train_size], position_table, grayscale_table, eachdim)
                 vhex = np.vectorize(hex)
                 vhex(am)
                 with open('output.csv', 'w') as csv_file:
