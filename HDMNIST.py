@@ -142,7 +142,7 @@ def main(mode):
                 am = retrain(am, X_train[:train_size], Y_train[:train_size], position_table, grayscale_table, eachdim)
                 c = 0
                 r = 0
-                while c <= eachdim:
+                while c <= eachdim - 1 :
                     while r <= 9:
                         am[r][c] = float(am[r][c])
                         r = r + 1
