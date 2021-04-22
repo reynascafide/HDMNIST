@@ -29,7 +29,7 @@ def lookup_generate(dim, datatype, n_keys):
 
 # Encoding the image into representative hypervecotr
 def encode(img, position_table, grayscale_table, dim):
-    img_hv = np.zeros(dim, dtype=np.int16)
+    img_hv = np.zeros(dim, dtype=np.float32)
     for pixel in range(len(img)):
         hv = np.multiply(position_table[pixel], grayscale_table[img[pixel]])
         img_hv = np.add(img_hv, hv)
@@ -104,7 +104,7 @@ def quantize(am, before_bw, after_bw):
     if before_bw > after_bw:
         am_ = np.divide(am, 2 ** (before_bw - after_bw))
         am_ = np.rint(am_)
-        am_ = am_.astype(np.int16)
+        am_ = am_.astype(np.float32)
     return am_
 
 # Initialization
@@ -139,15 +139,7 @@ def main(mode):
             am = train(am, X_train, Y_train, position_table, grayscale_table, eachdim)
             for epoch in range(retraining_epoch):
                 print('Retraining epoch: ' + str(epoch))
-                am = retrain(am, X_train[:train_size], Y_train[:train_size], position_table, grayscale_table, eachdim)
-                c = 0
-                r = 0
-                while c <= eachdim - 1 :
-                    while r <= 9:
-                        am[r][c] = float(am[r][c])
-                        r = r + 1
-                    r = 0
-                    c = c + 1  
+                am = retrain(am, X_train[:train_size], Y_train[:train_size], position_table, grayscale_table, eachdim)  
                 with open('output.csv', 'w') as csv_file:
                     csvwriter = csv.writer(csv_file)
                     for row in am:
