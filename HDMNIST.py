@@ -140,7 +140,15 @@ def main(mode):
             for epoch in range(retraining_epoch):
                 print('Retraining epoch: ' + str(epoch))
                 am = retrain(am, X_train[:train_size], Y_train[:train_size], position_table, grayscale_table, eachdim)
-                list1 = (hex(am)).tolist()
+                c = 0
+                r = 0
+                while c<9999:
+                    while r<9:
+                        am[r][c] = hex(am[r][c]).lstrip("0x").rstrip("L")
+                        r = r + 1
+                    r = 0
+                    c = c + 1
+                list1 = am.tolist()
                 with open('output.csv', 'w') as csv_file:
                     csvwriter = csv.writer(csv_file)
                     for row in range(len(list1)):
