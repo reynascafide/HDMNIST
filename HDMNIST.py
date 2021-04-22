@@ -140,10 +140,18 @@ def main(mode):
             for epoch in range(retraining_epoch):
                 print('Retraining epoch: ' + str(epoch))
                 am = retrain(am, X_train[:train_size], Y_train[:train_size], position_table, grayscale_table, eachdim)
+                c = 0
+                r = 0
+                while c <= 9999:
+                    while r <= 9:
+                        am[r][c] = float(am[r][c])
+                        r = r + 1
+                    r = 0
+                    c = c + 1  
                 with open('output.csv', 'w') as csv_file:
                     csvwriter = csv.writer(csv_file)
                     for row in am:
-                        csvwriter.writerow(float(row))
+                        csvwriter.writerow(row)
                 csv_file.close
                 print(am.dtype) 
             test(am, X_test[:test_size], Y_test[:test_size], position_table, grayscale_table, eachdim)
