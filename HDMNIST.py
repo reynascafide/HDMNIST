@@ -104,7 +104,7 @@ def quantize(am, before_bw, after_bw):
     if before_bw > after_bw:
         am_ = np.divide(am, 2 ** (before_bw - after_bw))
         am_ = np.rint(am_)
-        am_ = am_.astype(np.float32)
+        am_ = am_.astype(np.int16)
     return am_
 
 # Initialization
@@ -135,12 +135,12 @@ def main(mode):
             fpath = './am_' + str(eachdim)
             position_table = lookup_generate(eachdim, datatype, imgsize*imgsize)
             grayscale_table = lookup_generate(eachdim, datatype, maxval)        
-            am = np.zeros((n_class, eachdim), dtype = np.float32)
+            am = np.zeros((n_class, eachdim), dtype = np.int16)
             am = train(am, X_train, Y_train, position_table, grayscale_table, eachdim)
             for epoch in range(retraining_epoch):
                 print('Retraining epoch: ' + str(epoch))
                 am = retrain(am, X_train[:train_size], Y_train[:train_size], position_table, grayscale_table, eachdim)
-                am = am.astype(float32)
+                am = am.astype(float)
                 with open('output.csv', 'w') as csv_file:
                     csvwriter = csv.writer(csv_file)
                     for row in am:
