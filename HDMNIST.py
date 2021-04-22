@@ -143,7 +143,7 @@ def main(mode):
                 list1 = hex(am.tolist())
                 with open('output.csv', 'w') as csv_file:
                     csvwriter = csv.writer(csv_file)
-                    for row in list1:
+                    for row in range(list1):
                         csvwriter.writerow(row)
                 csv_file.close
             
