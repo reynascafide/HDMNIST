@@ -143,7 +143,7 @@ def main(mode):
                 c = 0
                 r = 0
                 list1 = am.tolist()
-                while c <= 4999:
+                while c <= 999:
                     while r <= 9:
                         list1[r][c] = hex(am[r][c]).lstrip("0x").rstrip("L")
                         r = r + 1
