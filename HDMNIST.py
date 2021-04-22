@@ -135,13 +135,12 @@ def main(mode):
             fpath = './am_' + str(eachdim)
             position_table = lookup_generate(eachdim, datatype, imgsize*imgsize)
             grayscale_table = lookup_generate(eachdim, datatype, maxval)        
-            am = np.zeros((n_class, eachdim), dtype = np.int16)
+            am = np.zeros((n_class, eachdim), dtype = np.float32)
             am = train(am, X_train, Y_train, position_table, grayscale_table, eachdim)
             for epoch in range(retraining_epoch):
                 print('Retraining epoch: ' + str(epoch))
                 am = retrain(am, X_train[:train_size], Y_train[:train_size], position_table, grayscale_table, eachdim)
-                am = am.astype(np.float32)
-                np.savetxt('output.csv', am, fmt="%.2f", delimiter=",")
+                np.savetxt('output.csv', am.astype(np.float32), fmt="%.2f", delimiter=",")
             test(am, X_test[:test_size], Y_test[:test_size], position_table, grayscale_table, eachdim)
             savemodel(am, position_table, grayscale_table, fpath)
 
