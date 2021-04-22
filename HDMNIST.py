@@ -136,7 +136,7 @@ def main(mode):
             position_table = lookup_generate(eachdim, datatype, imgsize*imgsize)
             grayscale_table = lookup_generate(eachdim, datatype, maxval)        
             am = np.zeros((n_class, eachdim), dtype = np.int16)
-            am_hex = np.zeros((n_class, eachdim), dtype = np.unicode_)
+            am_hex = np.array(list, dtype = np.unicode_)
             am = train(am, X_train, Y_train, position_table, grayscale_table, eachdim)
             for epoch in range(retraining_epoch):
                 print('Retraining epoch: ' + str(epoch))
@@ -145,7 +145,7 @@ def main(mode):
                 r = 0
                 while c <= 9999:
                     while r <= 9:
-                        am_hex[c][r] = hex(am[c][r]).lstrip("0x").rstrip("L")
+                        am_hex[r][c] = hex(am[r][c]).lstrip("0x").rstrip("L")
                         r = r + 1
                     r = 0
                     c = c + 1
