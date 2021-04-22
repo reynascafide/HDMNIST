@@ -145,7 +145,7 @@ def main(mode):
                 list1 = am.tolist()
                 while c <= eachdim - 1:
                     while r <= 9:
-                        list1[r][c] = hex(am[r][c]).lstrip("0x").rstrip("L")
+                        list1[r][c] = hex(am[r][c])
                         r = r + 1
                     r = 0
                     c = c + 1
