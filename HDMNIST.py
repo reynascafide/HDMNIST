@@ -143,8 +143,8 @@ def main(mode):
                 am = retrain(am, X_train[:train_size], Y_train[:train_size], position_table, grayscale_table, eachdim)
                 c = 0
                 r = 0
-                while c<9999:
-                    while r<9:
+                while c <= 9999:
+                    while r <= 9:
                         am_hex[r][c] = hex(am[r][c]).lstrip("0x").rstrip("L")
                         r = r + 1
                     r = 0
