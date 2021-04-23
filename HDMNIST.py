@@ -141,8 +141,9 @@ def main(mode):
             for epoch in range(retraining_epoch):
                 print('Retraining epoch: ' + str(epoch))
                 am = retrain(am, X_train[:train_size], Y_train[:train_size], position_table, grayscale_table, eachdim)  
-                with open('output.csv', 'w') as csv_file:
-                    csvwriter = csv.writer(csv_file)
+                with open('output.csv', 'w', newline = '') as csv_file:
+                    csvwriter = csv.writer(csv_file, quoting = csv.QUOTE_NONNUMERIC,
+                        delimiter = ' ')
                     for row in am_float:
                         csvwriter.writerow(row)
                 csv_file.close
