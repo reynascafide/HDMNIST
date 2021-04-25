@@ -114,7 +114,7 @@ def main(mode):
     global QBIT
     #mode can be: train / test / retrain (to-be-implemented)
     mnist_path = './mnist/'
-    dim = [10000, 5000, 2000, 1000] #Dimensions of HV
+    dim = [10000, 5000, 2000, 1000, 32] #Dimensions of HV
     maxval = 256 # Grayscale value range
     imgsize = 28 # Size of MNIST image
     n_class = 10 # Number of classes inside MNIST dataset.
@@ -142,7 +142,9 @@ def main(mode):
             for epoch in range(retraining_epoch):
                 print('Retraining epoch: ' + str(epoch))
                 am = retrain(am, X_train[:train_size], Y_train[:train_size], position_table, grayscale_table, eachdim)
-                print(np.shape(am))
+                am_uint = am.astype(np.uint16)
+                with open('output.mif', 'w') as mif_file:
+                    mif.dump(am_uint, mif_file, address_radix='HEX', data_radix='DEC')
             test(am, X_test[:test_size], Y_test[:test_size], position_table, grayscale_table, eachdim)
             savemodel(am, position_table, grayscale_table, fpath)
          
