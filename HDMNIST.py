@@ -143,8 +143,7 @@ def main(mode):
                 print('Retraining epoch: ' + str(epoch))
                 am = retrain(am, X_train[:train_size], Y_train[:train_size], position_table, grayscale_table, eachdim)  
                 with open('output.mif', 'w') as mif_file:
-                    am_uint = am.astype(np.uint16)
-                    mif.dump(am_uint, mif_file, packed=True, width=4, address_radix='HEX', data_radix='DEC')
+                    mif.dump(am, mif_file)
             test(am, X_test[:test_size], Y_test[:test_size], position_table, grayscale_table, eachdim)
             savemodel(am, position_table, grayscale_table, fpath)
          
