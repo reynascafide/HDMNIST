@@ -141,10 +141,11 @@ def main(mode):
             am = train(am, X_train, Y_train, position_table, grayscale_table, eachdim)
             for epoch in range(retraining_epoch):
                 print('Retraining epoch: ' + str(epoch))
-                am = retrain(am, X_train[:train_size], Y_train[:train_size], position_table, grayscale_table, eachdim)  
-                flat = am.reshape([1, 100000])
+                am = retrain(am, X_train[:train_size], Y_train[:train_size], position_table, grayscale_table, eachdim)
+                am_float = am.astype(np.float32)
                 with open('output.mif', 'w') as mif_file:
-                        mif.dump(flat, mif_file, address_radix='DEC', data_radix='DEC')
+                    for row in am_float:
+                    mif.dump(row, mif_file, address_radix='DEC', data_radix='DEC')
             test(am, X_test[:test_size], Y_test[:test_size], position_table, grayscale_table, eachdim)
             savemodel(am, position_table, grayscale_table, fpath)
          
