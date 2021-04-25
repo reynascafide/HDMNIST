@@ -140,7 +140,6 @@ def main(mode):
             am = np.zeros((n_class, eachdim), dtype = np.int16)
             am = train(am, X_train, Y_train, position_table, grayscale_table, eachdim)
             am_float = am.astype(np.float32)
-            quartus = quartustcl.Quartustcl()                                             
             for epoch in range(retraining_epoch):
                 print('Retraining epoch: ' + str(epoch))
                 am = retrain(am, X_train[:train_size], Y_train[:train_size], position_table, grayscale_table, eachdim)  
