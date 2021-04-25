@@ -142,9 +142,9 @@ def main(mode):
             for epoch in range(retraining_epoch):
                 print('Retraining epoch: ' + str(epoch))
                 am = retrain(am, X_train[:train_size], Y_train[:train_size], position_table, grayscale_table, eachdim)
-                am_bin = np.vectorize(np.binary_repr)(am, 32)
+                am_uint = am.astype(np.uint16)
                 with open('output.mif', 'w') as mif_file:
-                    mif.dump(am_bin, mif_file, width=32, address_radix='HEX', data_radix='DEC')
+                    mif.dump(am_uint, mif_file, width=4, address_radix='HEX', data_radix='DEC')
             test(am, X_test[:test_size], Y_test[:test_size], position_table, grayscale_table, eachdim)
             savemodel(am, position_table, grayscale_table, fpath)
          
