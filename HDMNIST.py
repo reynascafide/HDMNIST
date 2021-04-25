@@ -2,6 +2,8 @@ import numpy as np
 import pickle
 import pandas as pd
 import csv
+import mif
+import quartustcl
 from mnist import MNIST
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
@@ -138,19 +140,15 @@ def main(mode):
             am = np.zeros((n_class, eachdim), dtype = np.int16)
             am = train(am, X_train, Y_train, position_table, grayscale_table, eachdim)
             am_float = am.astype(np.float32)
+            quartus = quartustcl.Quartustcl()                                             
             for epoch in range(retraining_epoch):
                 print('Retraining epoch: ' + str(epoch))
                 am = retrain(am, X_train[:train_size], Y_train[:train_size], position_table, grayscale_table, eachdim)  
-                with open('output.csv', 'w', newline = '') as csv_file:
-                    csvwriter = csv.writer(csv_file, quoting = csv.QUOTE_NONNUMERIC, delimiter = ' ')
-                    for row in am_float:
-                        csvwriter.writerow(row)
-                csv_file.close
-                print(am_float.dtype) 
+                with open('output.mif', 'w') as mif_file:
+                    mif.dump(am_float, mif_file)
             test(am, X_test[:test_size], Y_test[:test_size], position_table, grayscale_table, eachdim)
             savemodel(am, position_table, grayscale_table, fpath)
-            
-            
+         
     elif mode == 'test':
         for eachqbit in q_bit:
             QBIT = eachqbit
