@@ -139,11 +139,12 @@ def main(mode):
             grayscale_table = lookup_generate(eachdim, datatype, maxval)        
             am = np.zeros((n_class, eachdim), dtype = np.int16)
             am = train(am, X_train, Y_train, position_table, grayscale_table, eachdim)
+            am_float = am.astype(float32)
             for epoch in range(retraining_epoch):
                 print('Retraining epoch: ' + str(epoch))
                 am = retrain(am, X_train[:train_size], Y_train[:train_size], position_table, grayscale_table, eachdim)  
                 with open('output.mif', 'w') as mif_file:
-                    mif.dump(am, mif_file, packed = True, address_radix='HEX', data_radix='DEC')
+                    mif.dump(am_float, mif_file, packed = True, address_radix='HEX', data_radix='DEC')
             test(am, X_test[:test_size], Y_test[:test_size], position_table, grayscale_table, eachdim)
             savemodel(am, position_table, grayscale_table, fpath)
          
