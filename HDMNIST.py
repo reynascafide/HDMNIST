@@ -145,7 +145,7 @@ def main(mode):
                 am_float = am.astype(np.float32)
                 with open('output.mif', 'w') as mif_file:
                     for row in am_float:
-                    mif.dump(row, mif_file, address_radix='DEC', data_radix='DEC')
+                        mif.dump(row, mif_file, address_radix='DEC', data_radix='DEC')
             test(am, X_test[:test_size], Y_test[:test_size], position_table, grayscale_table, eachdim)
             savemodel(am, position_table, grayscale_table, fpath)
          
