@@ -118,8 +118,8 @@ def main(mode):
     maxval = 256 # Grayscale value range
     imgsize = 28 # Size of MNIST image
     n_class = 10 # Number of classes inside MNIST dataset.
-    retraining_epoch = 2 # Number of retraining epochs
-    train_size = 500 # Size of training data.
+    retraining_epoch = 1 # Number of retraining epochs
+    train_size = 1000 # Size of training data.
     test_size = 300 # Size of testing data
     datatype = 'bipolar' # HV type inside item HVs, currently only support bipolar.
     q_bit = [16, 12, 8] # Quantization bits
@@ -142,8 +142,9 @@ def main(mode):
             for epoch in range(retraining_epoch):
                 print('Retraining epoch: ' + str(epoch))
                 am = retrain(am, X_train[:train_size], Y_train[:train_size], position_table, grayscale_table, eachdim)  
+                am_flatten = np.flatten(am)
                 with open('output.mif', 'w') as mif_file:
-                    mif.dump(am, mif_file)
+                        mif.dump(am_flatten, mif_file, address_radix='DEC', data_radix='DEC')
             test(am, X_test[:test_size], Y_test[:test_size], position_table, grayscale_table, eachdim)
             savemodel(am, position_table, grayscale_table, fpath)
          
