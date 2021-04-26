@@ -114,7 +114,7 @@ def main(mode):
     global QBIT
     #mode can be: train / test / retrain (to-be-implemented)
     mnist_path = './mnist/'
-    dim = [10000, 5000, 2000, 1000, 32] #Dimensions of HV
+    dim = [10000, 5000, 2000, 1000, 500, 250, 125, 62, 32] #Dimensions of HV
     maxval = 256 # Grayscale value range
     imgsize = 28 # Size of MNIST image
     n_class = 10 # Number of classes inside MNIST dataset.
