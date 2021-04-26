@@ -118,8 +118,8 @@ def main(mode):
     maxval = 256 # Grayscale value range
     imgsize = 28 # Size of MNIST image
     n_class = 10 # Number of classes inside MNIST dataset.
-    retraining_epoch = 2 # Number of retraining epochs
-    train_size = 500 # Size of training data.
+    retraining_epoch = 3 # Number of retraining epochs
+    train_size = 1500 # Size of training data.
     test_size = 300 # Size of testing data
     datatype = 'bipolar' # HV type inside item HVs, currently only support bipolar.
     q_bit = [16, 12, 8] # Quantization bits
