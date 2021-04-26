@@ -144,8 +144,7 @@ def main(mode):
             for epoch in range(retraining_epoch):
                 print('Retraining epoch: ' + str(epoch))
                 am = retrain(am, X_train[:train_size], Y_train[:train_size], position_table, grayscale_table, eachdim)
-                am = am.astype(np.uint16)
-                am_classHVs = (am.sum(axis=1)).astype(np.float32)
+                am_classHVs = (am.astype(np.uint16)).sum(axis=1)
             print(am_classHVs)
             
             test(am, X_test[:test_size], Y_test[:test_size], position_table, grayscale_table, eachdim)
