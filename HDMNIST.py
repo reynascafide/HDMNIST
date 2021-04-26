@@ -144,9 +144,9 @@ def main(mode):
             for epoch in range(retraining_epoch):
                 print('Retraining epoch: ' + str(epoch))
                 am = retrain(am, X_train[:train_size], Y_train[:train_size], position_table, grayscale_table, eachdim)
-                am_classHVs = (am.astype(np.uint16)).sum(axis=1)
-            print(am_classHVs.ndim)
-            print(am_classHVs.shape)
+                am_classHVs = am.astype(np.uint16)
+                am_classHVs = np.sum(axis=1, dtype='float64')
+            print(am_classHVs.dtype)
             
             test(am, X_test[:test_size], Y_test[:test_size], position_table, grayscale_table, eachdim)
             savemodel(am, position_table, grayscale_table, fpath)
