@@ -145,7 +145,7 @@ def main(mode):
                 print('Retraining epoch: ' + str(epoch))
                 am = retrain(am, X_train[:train_size], Y_train[:train_size], position_table, grayscale_table, eachdim)
                 am_classHVs = am.astype(np.uint16)
-                am_classHVs = np.sum(axis=1, dtype='float64')
+                am_classHVs = np.sum(am_classHVs, axis=1, dtype='float64')
             print(am_classHVs.dtype)
             
             test(am, X_test[:test_size], Y_test[:test_size], position_table, grayscale_table, eachdim)
