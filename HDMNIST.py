@@ -131,19 +131,22 @@ def main(mode):
     Y_test = Y_test[0:test_size]
     # !IMPORTANT! Currently samples are not randomized, please do that manually so far.
     # train_test_split() to-be-implemented
-
+    
+    
     if mode == 'train':
         for eachdim in dim:
             fpath = './am_' + str(eachdim)
             position_table = lookup_generate(eachdim, datatype, imgsize*imgsize)
             grayscale_table = lookup_generate(eachdim, datatype, maxval)        
             am = np.zeros((n_class, eachdim), dtype = np.int16)
+            am_classHVs = np.zeros([10 1], dtype = np.float32)
             am = train(am, X_train, Y_train, position_table, grayscale_table, eachdim)
             for epoch in range(retraining_epoch):
                 print('Retraining epoch: ' + str(epoch))
                 am = retrain(am, X_train[:train_size], Y_train[:train_size], position_table, grayscale_table, eachdim)
+                am_classHVs = am.sum(axis=1)
                 with open('output.mif', 'w') as mif_file:
-                    mif.dump(am, mif_file, address_radix='HEX', data_radix='DEC')
+                    mif.dump(am_classHVs, mif_file, address_radix='HEX', data_radix='DEC')
             test(am, X_test[:test_size], Y_test[:test_size], position_table, grayscale_table, eachdim)
             savemodel(am, position_table, grayscale_table, fpath)
          
